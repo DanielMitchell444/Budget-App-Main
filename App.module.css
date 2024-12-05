@@ -1,0 +1,3261 @@
+/*Default values */
+:root{
+  --header-height: 3.5rem;
+  --h2-font-size: 1.25rem;
+  --z-tooltip: 10;
+ --z-fixed: 100;
+}
+
+body{
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+.stuff{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.App{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+ul{
+  list-style-type: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+/* Navigation */
+
+.header{
+  width: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3); /* Darkens the area slightly */
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+  line-height: 90px;
+}
+
+.logo h1{
+  font-size: var(--h2-font-size)
+}
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  position: relative;
+  height: var(--header-height)
+}
+
+.navLinks{
+  display: flex;
+  flex-direction: row;
+  column-gap: 2.5rem;
+  font-size: 20px;
+  transition: all 0.3s ease; /* Smooth transition for menu items */
+}
+
+.navLogo h1{
+  color: white;
+}
+
+.navLink_cta{
+ border: none;
+ border-radius: 4px;
+ cursor: pointer;
+ background-color: #6A0DAD; /* Darker purple */
+ color: #FFFFFF; /* White text */
+ padding: 0.75rem 1.5rem;
+}
+
+.navLinks2{
+  color: white;
+}
+
+
+.toggleMenu{
+ display: none;
+}
+
+
+.toggle{
+ display: none;
+}
+
+.progressBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.step {
+  width: 40px;
+  height: 40px;
+  background-color: #482980; /* Purple */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+}
+
+.line {
+  height: 4px;
+  width: 60px;
+  background-color: #8256c3; /* Soft purple */
+}
+
+.active {
+  background-color: #33d17a; /* Bright green for active steps */
+  color: black;
+}
+
+.line.active {
+  background-color: #33d17a;
+}
+/*Homepage */
+.mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invalidEmailMessage{
+  color: #d00e17;
+  margin: 4px 0 12px;
+  font-size: 12px;
+  display: flex;
+}
+
+.errorInput{
+  border: 1px solid #d00e17;
+}
+
+.inputError {
+  border: 2px solid red;
+}
+
+.landingPageContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.landingContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.landingContainer h1{
+  color: white;
+  text-align: center;
+}
+
+.landingContainer p{
+  font-size: 20px;
+  color: white;
+  line-height: 2;
+  margin-top: 30px;
+  width: 900px;
+  text-align: center;
+}
+
+
+
+/*Login form CSS */
+
+.wrappedContainer{
+  background-image: linear-gradient(#0D1A2D, #1A0033);
+  background-size: cover;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.wrappedContainer2{
+
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+overflow-x: hidden;
+background-image: linear-gradient(#0D1A2D, #1A0033);
+background-size: cover;
+height: auto;
+width: 100vw;
+padding: 20px 0;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+
+}
+
+.container{
+  background: rgba(13, 26, 45, 0.85); /* semi-transparent dark overlay */
+  border: 2px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 70px;
+    color: #FFFFFF;
+    box-shadow: 0 0 20px rgba(123, 47, 247, 0.5);
+    transition: box-shadow 0.3s ease;
+    width: 400px;
+}
+
+.containerSignUp{
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 200px;
+  margin-top: 60px;
+  overflow-y: hidden; /* Allow scrolling within the box if content overflows */
+  color: #FFFFFF;
+}
+
+.forgotPasswordContainer{
+  background: rgba(13, 26, 45, 0.85); /* semi-transparent dark overlay */
+  border: 1px solid #00FFFF; /* neon cyan border */
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); /* subtle glow effect */
+  border-radius: 8px;
+  padding: 2rem;
+  margin-top: 60px;
+  width: 400px;
+  color: #FFFFFF;
+}
+
+.forgotPasswordContainer h1{
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.container2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+.content h2{
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: center;
+}
+
+.form{
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+}
+
+.form .inputFields{
+  position: relative;
+}
+
+.form .inputFieldsLogin{
+  position: relative;
+  width: 100%;
+}
+
+.inputFieldsLogin{
+  position: relative;
+  width: 100%;
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #555;
+  border-radius: 8px;
+  background-color: #121212;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.inputFields input{
+  position: relative;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  padding: 25px 10px 7.5px;
+  border-radius: 4px;
+  color: #000;
+  font-weight: 500;
+  font-size: 1em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+.inputFieldsLogin input{
+  position: relative;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  padding: 25px 10px 7.5px;
+  border-radius: 4px;
+  margin-top: 5px;
+  color: #000;
+  font-weight: 500;
+  font-size: 1em;
+  width: 100%
+}
+
+.inputFieldsLogin .login{
+  background: linear-gradient(135deg, #00FFFF, #FF00FF); /* neon gradient */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.inputFields2{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+
+.inputFields2 input{
+  position: relative;
+  background-color: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  outline: none;
+  padding: 10px;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 5px;
+  margin-top: 5px;
+  color: white;
+  font-weight: 500;
+  margin-top: 10px;
+  font-size: 1em;
+  width: 100%
+}
+
+.inputFields2 input:focus{
+  outline: none;
+  border: 1px solid #6C63FF; /* Highlight on focus */
+  box-shadow: 0px 0px 5px #6C63FF;
+}
+
+/* Links CSS */
+
+.links{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.links a{
+  color: #fff;
+  text-decoration: none;
+}
+
+.links a:nth-child(2){
+  color: #fff;
+  font-weight: 600;
+}
+
+/*CSS for login button */
+.inputFields input[type = "submit"]{
+  background: linear-gradient(to right, #6C63FF, #C779D0);
+  border: none;
+  border-radius: 5px;
+  width: 320px;
+  height: 52px;
+  padding: 4px 16px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.setupContainer{
+    margin-top: 75px;
+  
+    padding: 30px;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 450px;
+    border-radius: 10px; /* Soft rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.active {
+  background: #6a67ce;
+}
+
+.completed {
+  background: #6a67ce;
+}
+
+.inputFields input[type = "submit"]:hover{
+  background: linear-gradient(to left, #6C63FF, #C779D0); /* Reverse gradient on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.reset{
+  background: linear-gradient(135deg, #00FFFF, #FF00FF); /* neon gradient */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.inputFields2 input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="date"]:hover {
+  border-color: #8e44ad; /* Slightly brighter on hover */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus {
+  border-color: #a29bfe;
+  box-shadow: 0 0 5px #a29bfe;
+}
+
+.inputFields2 label{
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+.submit{
+  padding: 10px;
+  background-color: #608BC1;
+  color: #fff;
+  font-size: 1.35em;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* CSS for About Page */
+
+.features{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+
+.features h1{
+  color: #fff;
+  margin-bottom: 40px;
+  text-decoration: underline;
+  text-underline-offset: 1.5rem;
+  text-decoration-color: linear-gradient(45deg, #00c6ff, #0072ff, #9b59b6, #ff6ec7);
+}
+
+.features h1::after{
+  text-decoration-color: linear-gradient(45deg, #00c6ff, #0072ff, #9b59b6, #ff6ec7);;
+}
+
+.features p{
+  color: #fff;
+  width: 460px;
+  text-align: justify;
+  line-height: 2.5;
+}
+
+/*Our Mission */
+
+.mission{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+
+.mission h1{
+  color: white;
+  margin-bottom: 40px;
+  text-decoration: underline;
+  text-underline-offset: 1.5rem;
+}
+
+.mission p{
+  text-align: justify;
+  color: white;
+  width: 440px;
+  line-height: 2.5;
+  margin-bottom: 20px;
+  
+}
+
+.progressIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.step {
+  width: 35px;
+  height: 35px;
+  background: #3b3e5c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.line {
+  width: 50px;
+  height: 4px;
+  background: #3b3e5c;
+  margin: 0 0.5rem;
+  transition: background 0.3s;
+}
+
+.active {
+  background: #7c3aed;
+  color: #ffffff;
+}
+
+.completed {
+  background: #6a67ce;
+}
+/*Key Features */
+
+.keyFeatures{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.keyFeatures h1{
+  color: white;
+  text-align: center;
+  
+}
+
+#features2{
+  text-decoration: underline;
+  text-underline-offset: 1.5rem;
+  margin-bottom: 60px;
+}
+
+.featuresContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.featuresBox{
+  background: rgba(13, 26, 45, 0.85); /* semi-transparent dark overlay */
+    border: 1px solid #00FFFF; /* neon cyan border */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); /* subtle glow effect */
+    border-radius: 8px;
+    padding: 2rem;
+    width: 350px;
+    height: 350px;
+}
+
+.featuresBox h1{
+  font-size: 18px;
+}
+
+.featuresBox p{
+  color: #fff
+}
+
+.featureText p{
+  font-size: 15px;
+  text-align: center;
+}
+
+/* News Page CSS*/
+
+.news h1{
+  color: white;
+}
+
+/* Contact page CSS */
+
+.contact h1{
+  color: white;
+}
+
+
+@media (min-width: 400px) and (max-width: 431px){
+  .landingPageContainer{
+    position: relative;
+    background-image: url("../Assets/iStock-1225527535\ \(1\).jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .account p{
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .linkSign{
+    padding: 6px;
+    color: #fff;
+   }
+  
+
+  .inputFields2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .containerSignUp{
+
+    padding: 0 40px 40px;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 320px;
+    border-radius: 10px; /* Soft rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+   }
+
+  .inputFields2 input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 16px;
+    height: 52px;
+    width: 320px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 16px;
+   }
+  
+ 
+  .landingContainer h1{
+   margin-bottom: 15px; /* Space between header and subtext */
+   color: #FFFFFF; /* White */
+   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Drop shadow for contrast */
+   font-weight: bold;
+   font-size: 1.2rem;
+  }
+ 
+  .landingContainer p{
+   font-size: 0.9rem;
+   color: #FFFFFF; /* Light gray or white for strong contrast *
+   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+   margin-bottom: 30px; /* Space between subtext and button */
+   font-weight: 600;
+   margin-bottom: 20px;
+   max-width: 600px;
+   margin: 0 auto;
+   line-height: 1.6;
+   text-align: center;
+   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Slight shadow for readability */
+ }
+ 
+  .landingPageContainer::before{
+   content: '';
+   position: absolute;
+   pointer-events: none;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.2); /* Slightly more opacity for better readability */
+  }
+ 
+  .landingContainer{
+    padding: 40px;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 70px;
+ 
+  }
+ 
+  .getStarted{
+   background-color: #4A148C;
+     color: #FFFFFF;
+     transition: 0.3s;
+   font-size: 1rem;
+   padding: 10px 15px;
+   margin:  15px auto;
+   margin-top: 20px;
+   width: auto;
+   border-radius: 8px;
+   box-shadow: none;
+   border: 2px solid #FFFFFF; /* High-contrast border */
+     transition: 0.3s;
+   z-index: 10;
+   display: inline-block;
+  }
+ 
+  .getStarted:hover{
+   background-color: #5A52E0; /* Slightly darker on hover */
+   transform: translateY(-3px); /* Lift effect */
+  }
+  
+  .features{
+    padding: 20px 0;
+  }
+  
+  .features h1{
+    line-height: 1.8em;
+  }
+  
+  .features p{
+    width: 330px;
+    font-size: 15px;
+    margin: 0 0 15px;
+    line-height: 1.8em;
+  }
+
+  .container{
+    width: 320px;
+  }
+  
+  .mission{
+    padding: 20px 0;
+  }
+  
+  .mission h1{
+    line-height: 1.8em;
+  }
+  
+  .mission p{
+    width: 350px;
+    font-size: 15px;
+    margin: 0 0 15px;
+    line-height: 1.8em;
+  }
+
+    .wrappedContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+
+  .inputFields{
+    width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+    .inputFields2{
+      width: 320px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    .header{
+      width: 100%;
+    }
+
+    .nav{
+      width: 100%;
+    }
+
+
+
+    .mainContent{
+      width: 100%;
+    }
+    
+     .wrappedContainer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+     }
+    
+     .inputFields2 input, label{
+      font-family: 'Arial', sans-serif;
+      font-size: 1rem;
+     }
+    
+
+    
+     .content h2{
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 1rem;
+     }
+     .doubleForm{
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+     }
+
+     .thing{
+      width: 130px;
+     }
+    
+     .alternativeSignIn{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 12px;
+     
+     }
+    
+     input[type = "email"]{
+      width: 320px;
+      height: 52px;
+     }
+    
+     .content{
+      padding: 40px 40px 24px;
+     }
+    
+     .content h1{
+      font-size: 32px;
+      width: 320px;
+      margin: 24px, 0, 0;
+      font-weight: bold;
+     }
+    
+     .googleSignInButton {
+      cursor: pointer;
+      transition: background-color .3s, box-shadow .3s;
+      padding: 12px 16px 12px 42px;
+      border: none;
+      border-radius: 3px;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      color: #757575;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+      background-color: white;
+      background-repeat: no-repeat;
+      background-position: 12px 11px;
+      width: 320px;
+      font-size: 16px;
+      display: flex;
+      height: 52px;
+    }
+    
+    .googleSignInButton:hover {
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    }
+    
+    .googleSignInButton:active {
+      background-color: #eeeeee;
+    }
+    
+    .googleSignInButton:active {
+      outline: none;
+          box-shadow: 
+          0 -1px 0 rgba(0, 0, 0, .04),
+          0 2px 4px rgba(0, 0, 0, .25),
+          0 0 0 3px #c8dafc;
+    }
+    
+    .googleSignInButton:disabled {
+      filter: grayscale(100%);
+      background-color: #ebebeb;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      cursor: not-allowed;
+    }
+    
+    .microsoftSignInButton {
+      cursor: pointer;
+      transition: background-color .3s, box-shadow .3s;
+          
+      padding: 12px 16px 12px 42px;
+      border: none;
+      border-radius: 3px;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      
+      color: #757575;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+      
+      background-image: url("https://www.svgrepo.com/download/303143/microsoft-logo.svg");
+      background-color: white;
+      background-repeat: no-repeat;
+      background-position: 12px 11px;
+      background-size: contain;
+      width: 320px;
+      font-size: 16px;
+      display: flex;
+      height: 52px;
+    }
+    
+    .microsoftSignInButton:hover {
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    }
+    
+    .microsoftSignInButton:active {
+      background-color: #eeeeee;
+    }
+    
+    .microsoftSignInButton:active {
+      outline: none;
+          box-shadow: 
+          0 -1px 0 rgba(0, 0, 0, .04),
+          0 2px 4px rgba(0, 0, 0, .25),
+          0 0 0 3px #c8dafc;
+    }
+    
+    .microsoftSignInButton:disabled {
+      filter: grayscale(100%);
+      background-color: #ebebeb;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      cursor: not-allowed;
+    }
+    
+    
+     .or{
+      display: flex
+      ;
+          flex-direction: row;
+          text-transform: uppercase;
+          border: none;
+          font-size: 12px;
+          font-weight: 400;
+          gap: 10px;
+          margin: 0;
+          padding: 8px 0 0;
+          align-items: center;
+          justify-content: center;
+          vertical-align: baseline;
+     }
+    
+     .or h2{
+      font-size: 12px;
+     }
+
+     .inputFields input[type = "submit"]{
+      background: linear-gradient(to right, #6C63FF, #C779D0);
+        border: none;
+        border-radius: 5px;
+        width: 320px;
+        height: 52px;
+        padding: 4px 16px;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+     }
+    
+}
+
+@media(max-width: 600px){
+  .navLinks{
+    display: none;
+  }
+}
+
+@media(max-width: 500px){
+  .navLinks{
+    display: none;
+  }
+}
+
+@media(max-width: 768px) {
+  .navLinks{
+    display: none;
+    width: 100vw;;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: linear-gradient(180deg, #1E0033 0%, #4A148C 50%, #000C66 100%);
+    padding: 0.5rem 3rem 0;
+    height: 100vh;
+
+  }
+
+  .inputFields input[type = "submit"]{
+    background: linear-gradient(to right, #6C63FF, #C779D0);
+    border: none;
+    border-radius: 5px;
+    width: 320px;
+    height: 52px;
+    padding: 4px 16px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .inputFields2{
+   
+  }
+
+  .form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .inputFields2 input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 16px;
+    height: 52px;
+    width: 320px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 16px;
+   }
+  
+
+  .content p{
+    margin-top: 0px;
+    text-align: center;
+    margin-bottom: 0px;
+   }
+  
+   .inputFields2 input{
+    margin-top: 0px;
+    width: 100%;
+    height: 52px;
+   }
+
+  .thing{
+    width: 200px;
+   }
+  
+   .alternativeSignIn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+   
+   }
+  
+   input[type = "email"]{
+    width: 320px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+  
+  
+   .content h1{
+    font-size: 24px;
+    margin: 24px, 0, 0;
+    font-weight: bold;
+   }
+  
+  
+  
+  
+   .or{
+    display: flex
+    ;
+        flex-direction: row;
+        text-transform: uppercase;
+        border: none;
+        font-size: 12px;
+        font-weight: 400;
+        gap: 10px;
+        margin: 0;
+        padding: 8px 0 0;
+        align-items: center;
+        justify-content: center;
+        vertical-align: baseline;
+   }
+  
+   .or h2{
+    font-size: 12px;
+   }
+  
+
+  .navMenu{
+    top: 0;
+  }
+
+  .navLinks.active{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: -15px;
+    right: 0;
+    width: 100vw;
+    opacity: 1; /* Fully visible */
+    padding: 0.5rem 3rem 0;
+    column-gap: 2.5rem;
+    transition: right 0.4s;
+  }
+
+  .toggleMenu{
+    display: flex;
+  }
+
+  .button{
+    background: linear-gradient(to right, #6C63FF, #C779D0);
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .toggle{
+    display: flex;
+    color: white;
+    font-size: 24px;
+  }
+
+  .App{
+    background-image: url("../Assets/iStock-1225527535\ \(1\).jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    
+  }
+
+  .landingPageContainer::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.2); /* Slightly more opacity for better readability */
+    z-index: 1;
+  }
+  
+  .landingContainer{
+    padding: 40px;
+    margin-bottom: 30px; /* More spacing for large screens */
+    text-align: center;
+    max-width: 900px; /* Limit text width for readability */
+    margin: 0 auto; /* Center content block */
+    margin-top: 70px;
+  }
+  
+  .landingContainer h1{
+    margin-bottom: 20px; /* Space between header and subtext */
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #FFFFFF; /* White */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Drop shadow for contrast */
+    font-weight: bold;
+  }
+
+  .navLink_cta{
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+  
+  .landingContainer p{
+    width: 500px;
+    color: #FFFFFF; /* Light gray or white for strong contrast *
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px; /* Space between subtext and button */
+    font-weight: 600;
+    margin-bottom: 20px; /* Space between subtext and button */
+    font-size: 1.2em;
+    padding: 0 10px;
+    color: #FFFFFF; /* Light gray or white for strong contrast *
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px; /* Space between subtext and button */
+    font-weight: 600;
+    margin-bottom: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  
+  .heading{
+    font-size: 2rem;
+    color: #FFFFFF; /* Bright white */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Adds contrast and visibility */
+    font-weight: bold;
+  }
+  
+  
+  .landingContainer p{
+   font-size: 1rem;
+   font-weight: bold;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  .features{
+    padding: 20px 0;
+  }
+  .getStarted{
+  
+    padding: 15px 25px; /* Balance size */
+  border-radius: 12px;
+  background-color: #6a0dad;
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.3s;
+  pointer-events: none;
+  z-index: 10;
+  }
+  
+  .getStarted:hover{
+    background-color: #8e44ad; /* Slightly lighter */
+    transform: scale(1.05); /* Scale up on hover */
+  }
+  
+
+  .features{
+    padding: 20px 0;
+   }
+  
+   .features h1{
+    line-height: 1.8em;
+   }
+  
+   .features p{
+    width: 440px;
+    line-height: 1.8em;
+    font-size: 15px;
+    margin: 0 0 15px
+   }
+  
+   .mission{
+    padding: 20px 0;
+   }
+  
+   .mission h1{
+    line-height: 1.8em;
+   }
+  
+   .mission p{
+    width: 440px;
+    line-height: 1.8em;
+    font-size: 15px;
+    margin: 0 0 15px;
+   }
+
+   .keyFeatures h1{
+    color: white;
+    text-align: center;
+    
+  }
+  
+  #features2{
+    text-decoration: underline;
+    text-underline-offset: 1.5rem;
+    margin-bottom: 60px;
+  }
+  
+  .featuresContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .featuresBox{
+    background: rgba(13, 26, 45, 0.85); /* semi-transparent dark overlay */
+      border: 1px solid #00FFFF; /* neon cyan border */
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); /* subtle glow effect */
+      border-radius: 8px;
+      padding: 2rem;
+      width: 300px;
+  }
+  
+  .featureText h1{
+    font-size: 18px;
+    line-height: 1.8em;
+    margin-bottom: 5px;
+  }
+  
+  .featuresBox p{
+    color: #fff;
+    font-size: 15px;
+    margin: 0 0 15px;
+    line-height: 1.8em;
+  }
+
+  .featuresBox{
+    width: 400px;
+  }
+
+  .doubleForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+  }
+
+  .containerSignUp{
+    max-width: 350px;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 10px;
+    min-height: auto;
+  }
+
+  .doubleFormField{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .content h1{
+    font-size: 32px;
+    margin: 24px 0 0;
+    width: 320px;
+    text-align: center;
+  }
+
+  .content h2{
+    margin-bottom: 20px;
+  }
+
+  label{
+    font-size: 0.9rem;
+    color: #cccccc;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .doubleForm{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-direction: column;
+  }
+
+  
+  
+}
+
+@media(max-width: 800px){
+  .toggle{
+    display: flex;
+    color: white;
+  }
+}
+
+@media(max-width: 850px){
+  .toggle{
+    display: flex;
+    color: white;
+  }
+}
+
+@media(max-width: 900px){
+  .navLinks{
+    display: none;
+  }
+
+  .toggle{
+    display: flex;
+    color: white;
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 362px) and (max-width: 376px){
+
+  .landingPageContainer{
+    position: relative;
+    background-image: url("../Assets/iStock-1225527535\ \(1\).jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .account p{
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .linkSign{
+    padding: 6px;
+    color: #fff;
+   }
+  
+
+  .inputFields2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .containerSignUp{
+
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+    
+    border-radius: 10px; /* Soft rounded corners */
+    min-height: 400px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+   }
+
+  .inputFields2 input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 16px;
+    height: 52px;
+    width: 320px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 16px;
+   }
+  
+ 
+  .landingContainer h1{
+   margin-bottom: 15px; /* Space between header and subtext */
+   color: #FFFFFF; /* White */
+   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Drop shadow for contrast */
+   font-weight: bold;
+   font-size: 1.2rem;
+  }
+ 
+  .landingContainer p{
+   font-size: 1.2rem;
+   color: #FFFFFF; 
+   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+   margin-bottom: 30px; /* Space between subtext and button */
+   font-weight: 600;
+   margin-bottom: 20px;
+   max-width: 100%;
+   margin: 0 auto;
+   line-height: 1.6;
+   text-align: center;
+   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Slight shadow for readability */
+ }
+ 
+  .landingPageContainer::before{
+   content: '';
+   position: absolute;
+   pointer-events: none;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.3); /* Slightly more opacity for better readability */
+  }
+ 
+  .landingContainer{
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 90%;
+    width: 600px;
+    word-wrap: break-word;
+    margin: 0 auto;
+    margin-top: 70px;
+ 
+  }
+ 
+  .getStarted{
+   background-color: #4A148C;
+     color: #FFFFFF;
+     transition: 0.3s;
+   font-size: 1rem;
+   padding: 10px 15px;
+   margin:  15px auto;
+   margin-top: 20px;
+   width: auto;
+   border-radius: 8px;
+   box-shadow: none;
+   border: 2px solid #FFFFFF; /* High-contrast border */
+     transition: 0.3s;
+   z-index: 10;
+   display: inline-block;
+  }
+ 
+  .getStarted:hover{
+   background-color: #5A52E0; /* Slightly darker on hover */
+   transform: translateY(-3px); /* Lift effect */
+  }
+  
+  .features{
+    padding: 20px 0;
+  }
+  
+  .features h1{
+    line-height: 1.8em;
+  }
+  
+  .features p{
+    width: 330px;
+    font-size: 15px;
+    margin: 0 0 15px;
+    line-height: 1.8em;
+  }
+
+  .container{
+    width: 320px;
+  }
+  
+  .mission{
+    padding: 20px 0;
+  }
+  
+  .mission h1{
+    line-height: 1.8em;
+  }
+  
+  .mission p{
+    width: 350px;
+    font-size: 15px;
+    margin: 0 0 15px;
+    line-height: 1.8em;
+  }
+
+    .wrappedContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+  }
+  
+
+  .inputFields{
+    width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+    .inputFields2{
+      width: 320px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    .header{
+      width: 100%;
+    }
+
+    .nav{
+      width: 100%;
+    }
+
+
+
+    .mainContent{
+      max-width: 600px;
+      text-align: center;
+    }
+    
+     .wrappedContainer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+     }
+    
+     .inputFields2 input, label{
+      font-family: 'Arial', sans-serif;
+      font-size: 1rem;
+     }
+    
+
+    
+     .content h2{
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 1rem;
+     }
+     .doubleForm{
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+     }
+
+     .thing{
+      width: 130px;
+     }
+    
+     .alternativeSignIn{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 8px;
+     
+     }
+    
+     input[type = "email"]{
+      width: 320px;
+      height: 52px;
+     }
+    
+     .content{
+      padding: 40px 40px 2px;
+     }
+    
+     .content h1{
+      font-size: 32px;
+      width: 320px;
+      margin: 24px, 0, 0;
+      font-weight: bold;
+     }
+    
+     .googleSignInButton {
+      cursor: pointer;
+      transition: background-color .3s, box-shadow .3s;
+          
+      padding: 12px 16px 12px 42px;
+      border: none;
+      border-radius: 3px;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      
+      color: #757575;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+      
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+      background-color: white;
+      background-repeat: no-repeat;
+      background-position: 12px 11px;
+      width: 320px;
+      font-size: 16px;
+      display: flex;
+      margin-bottom: 8px;
+      height: 52px;
+    }
+    
+    .googleSignInButton:hover {
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    }
+    
+    .googleSignInButton:active {
+      background-color: #eeeeee;
+    }
+    
+    .googleSignInButton:active {
+      outline: none;
+          box-shadow: 
+          0 -1px 0 rgba(0, 0, 0, .04),
+          0 2px 4px rgba(0, 0, 0, .25),
+          0 0 0 3px #c8dafc;
+    }
+    
+    .googleSignInButton:disabled {
+      filter: grayscale(100%);
+      background-color: #ebebeb;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      cursor: not-allowed;
+    }
+    
+    .microsoftSignInButton {
+      cursor: pointer;
+      transition: background-color .3s, box-shadow .3s;
+          
+      padding: 12px 16px 12px 42px;
+      border: none;
+      border-radius: 3px;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      
+      color: #757575;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+      
+      background-image: url("https://www.svgrepo.com/download/303143/microsoft-logo.svg");
+      background-color: white;
+      background-repeat: no-repeat;
+      background-position: 12px 11px;
+      background-size: contain;
+      width: 320px;
+      font-size: 16px;
+      display: flex;
+      height: 52px;
+    }
+    
+    .microsoftSignInButton:hover {
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    }
+    
+    .microsoftSignInButton:active {
+      background-color: #eeeeee;
+    }
+    
+    .microsoftSignInButton:active {
+      outline: none;
+          box-shadow: 
+          0 -1px 0 rgba(0, 0, 0, .04),
+          0 2px 4px rgba(0, 0, 0, .25),
+          0 0 0 3px #c8dafc;
+    }
+    
+    .microsoftSignInButton:disabled {
+      filter: grayscale(100%);
+      background-color: #ebebeb;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      cursor: not-allowed;
+    }
+    
+    
+     .or{
+      display: flex
+      ;
+          flex-direction: row;
+          text-transform: uppercase;
+          border: none;
+          font-size: 12px;
+          font-weight: 400;
+          gap: 10px;
+          margin: 0;
+          padding: 8px 0 0;
+          align-items: center;
+          justify-content: center;
+          vertical-align: baseline;
+     }
+    
+     .or h2{
+      font-size: 12px;
+     }
+
+     .inputFields input[type = "submit"]{
+      background: linear-gradient(to right, #6C63FF, #C779D0);
+        border: none;
+        border-radius: 5px;
+        width: 320px;
+        height: 52px;
+        padding: 4px 16px;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+     }
+    
+}
+
+@media(max-width: 361px){
+  .landingPageContainer{
+      position: relative;
+      background-image: url("../Assets/iStock-1225527535\ \(1\).jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: bottom center;
+      height: 100vh;
+      width: 100vw;
+  
+  }
+
+  .account p{
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .linkSign{
+    padding: 6px;
+    color: #fff;
+   }
+  
+
+  .inputFields2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+  }
+
+  .containerSignUp{
+
+    padding: 0 40px 40px;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 320px;
+    border-radius: 10px; /* Soft rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+   }
+
+  .inputFields2 input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 16px;
+    height: 52px;
+    width: 320px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 16px;
+   }
+  
+ 
+  .landingContainer h1{
+   margin-bottom: 15px; /* Space between header and subtext */
+   color: #FFFFFF; /* White */
+   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Drop shadow for contrast */
+   font-weight: bold;
+   font-size: 1.2rem;
+  }
+ 
+  .landingContainer p{
+   font-size: 0.9rem;
+   color: #FFFFFF; /* Light gray or white for strong contrast *
+   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+   margin-bottom: 30px; /* Space between subtext and button */
+   font-weight: 600;
+   margin-bottom: 20px;
+   max-width: 600px;
+   margin: 0 auto;
+   line-height: 1.6;
+   text-align: center;
+   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Slight shadow for readability */
+ }
+ 
+  .landingPageContainer::before{
+   content: '';
+   position: absolute;
+   pointer-events: none;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.2); /* Slightly more opacity for better readability */
+  }
+ 
+  .landingContainer{
+    padding: 40px;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 70px;
+ 
+  }
+ 
+  .getStarted{
+   background-color: #4A148C;
+     color: #FFFFFF;
+     transition: 0.3s;
+   font-size: 1rem;
+   padding: 10px 15px;
+   margin:  15px auto;
+   margin-top: 20px;
+   width: auto;
+   border-radius: 8px;
+   box-shadow: none;
+   border: 2px solid #FFFFFF; /* High-contrast border */
+     transition: 0.3s;
+   z-index: 10;
+   display: inline-block;
+  }
+ 
+  .getStarted:hover{
+   background-color: #5A52E0; /* Slightly darker on hover */
+   transform: translateY(-3px); /* Lift effect */
+  }
+  
+  .features{
+    padding: 20px 0;
+  }
+  
+  .features h1{
+    line-height: 1.8em;
+  }
+  
+  .features p{
+    width: 330px;
+    font-size: 15px;
+    margin: 0 0 15px;
+    line-height: 1.8em;
+  }
+
+  .container{
+    width: 320px;
+  }
+  
+  .mission{
+    padding: 20px 0;
+  }
+  
+  .mission h1{
+    line-height: 1.8em;
+  }
+  
+  .mission p{
+    width: 350px;
+    font-size: 15px;
+    margin: 0 0 15px;
+    line-height: 1.8em;
+  }
+
+    .wrappedContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+  }
+  
+
+  .inputFields{
+    width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+    .inputFields2{
+      width: 320px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    .header{
+      width: 100%;
+    }
+
+    .nav{
+      width: 100%;
+    }
+
+
+
+    .mainContent{
+      width: 100%;
+    }
+    
+     .wrappedContainer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+     }
+    
+     .inputFields2 input, label{
+      font-family: 'Arial', sans-serif;
+      font-size: 1rem;
+     }
+    
+
+    
+     .content h2{
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 1rem;
+     }
+     .doubleForm{
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+     }
+
+     .thing{
+      width: 130px;
+     }
+    
+     .alternativeSignIn{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 8px;
+     
+     }
+    
+     input[type = "email"]{
+      width: 320px;
+      height: 52px;
+     }
+    
+     .content{
+      padding: 40px 40px 2px;
+     }
+    
+     .content h1{
+      font-size: 32px;
+      width: 320px;
+      margin: 24px, 0, 0;
+      font-weight: bold;
+     }
+    
+     .googleSignInButton {
+      cursor: pointer;
+      transition: background-color .3s, box-shadow .3s;
+          
+      padding: 12px 16px 12px 42px;
+      border: none;
+      border-radius: 3px;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      
+      color: #757575;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+      
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+      background-color: white;
+      background-repeat: no-repeat;
+      background-position: 12px 11px;
+      width: 320px;
+      font-size: 16px;
+      display: flex;
+      margin-bottom: 8px;
+      height: 52px;
+    }
+    
+    .googleSignInButton:hover {
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    }
+    
+    .googleSignInButton:active {
+      background-color: #eeeeee;
+    }
+    
+    .googleSignInButton:active {
+      outline: none;
+          box-shadow: 
+          0 -1px 0 rgba(0, 0, 0, .04),
+          0 2px 4px rgba(0, 0, 0, .25),
+          0 0 0 3px #c8dafc;
+    }
+    
+    .googleSignInButton:disabled {
+      filter: grayscale(100%);
+      background-color: #ebebeb;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      cursor: not-allowed;
+    }
+    
+    .microsoftSignInButton {
+      cursor: pointer;
+      transition: background-color .3s, box-shadow .3s;
+          
+      padding: 12px 16px 12px 42px;
+      border: none;
+      border-radius: 3px;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      
+      color: #757575;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+      
+      background-image: url("https://www.svgrepo.com/download/303143/microsoft-logo.svg");
+      background-color: white;
+      background-repeat: no-repeat;
+      background-position: 12px 11px;
+      background-size: contain;
+      width: 320px;
+      font-size: 16px;
+      display: flex;
+      height: 52px;
+    }
+    
+    .microsoftSignInButton:hover {
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    }
+    
+    .microsoftSignInButton:active {
+      background-color: #eeeeee;
+    }
+    
+    .microsoftSignInButton:active {
+      outline: none;
+          box-shadow: 
+          0 -1px 0 rgba(0, 0, 0, .04),
+          0 2px 4px rgba(0, 0, 0, .25),
+          0 0 0 3px #c8dafc;
+    }
+    
+    .microsoftSignInButton:disabled {
+      filter: grayscale(100%);
+      background-color: #ebebeb;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+      cursor: not-allowed;
+    }
+    
+    
+     .or{
+      display: flex
+      ;
+          flex-direction: row;
+          text-transform: uppercase;
+          border: none;
+          font-size: 12px;
+          font-weight: 400;
+          gap: 10px;
+          margin: 0;
+          padding: 8px 0 0;
+          align-items: center;
+          justify-content: center;
+          vertical-align: baseline;
+     }
+    
+     .or h2{
+      font-size: 12px;
+     }
+
+     .inputFields input[type = "submit"]{
+      background: linear-gradient(to right, #6C63FF, #C779D0);
+        border: none;
+        border-radius: 5px;
+        width: 320px;
+        height: 52px;
+        padding: 4px 16px;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+     }
+    
+
+  }
+
+  @media (min-width: 432px) and (max-width: 500px){
+    .landingPageContainer{
+      position: relative;
+      background-image: url("../Assets/iStock-1225527535\ \(1\).jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: bottom center;
+      height: 100vh;
+      width: 100vw;
+  }
+  
+  }
+
+
+
+@media(min-width: 768px) and  (max-width: 1023px){
+  .landingPageContainer{
+    position: relative;
+    background-image: url("../Assets/iStock-1225527535\ \(1\).jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+
+
+
+.mainContent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading{
+  font-size: 32px;
+}
+
+.containerSignUp{
+  margin-top: 75px;
+
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px; /* Soft rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 100px;
+  
+ }
+
+ .wrappedContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+ }
+
+ .heading{
+  font-size: 48px;
+  color: #FFFFFF; /* Bright white */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Adds contrast and visibility */
+ }
+
+
+ .landingContainer h1{
+  margin-bottom: 20px; /* Space between header and subtext */
+  color: #FFFFFF; /* White */
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  font-size: 2.5rem;
+  text-align: center;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+ }
+
+ .landingContainer p{
+
+ }
+
+ .doubleForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+
+ }
+
+ .inputFields23{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+  
+ }
+ 
+
+ .landingPageContainer::before{
+  
+ }
+
+ .landingContainer{
+  padding: 4rem 2rem;
+    margin-bottom: 30px; /* More spacing for large screens */
+    text-align: center;
+    max-width: 600px; /* Limit text width for readability */
+    margin: 0 auto; /* Center content block */
+    margin-top: 70px;
+
+ }
+
+ .inputFields2 input, label{
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+ }
+
+
+
+ .account p{
+  text-align: center;
+ }
+
+ .inputFields2 input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 16px;
+  height: 52px;
+  width: 320px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 16px;
+ }
+
+
+
+ .content h2{
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+ }
+ .doubleForm{
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+ }
+
+ .landingContainer p{
+  font-size: 1.25rem;
+  color: #FFFFFF;  
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 30px; /* Space between subtext and button */
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 50px;
+
+}
+
+.getStarted{
+  background-color: #4A148C;
+  color: #FFFFFF;
+  transition: 0.3s;
+padding: 15px 30px;
+border-radius: 8px;
+box-shadow: none;
+border: 2px solid #FFFFFF; /* High-contrast border */
+  transition: 0.3s;
+z-index: 10;
+border: 2px solid rgba(255, 255, 255, 0.5);
+box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);
+}
+
+.thing{
+  width: 200px;
+ }
+
+ .alternativeSignIn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+ 
+ }
+
+ input[type = "email"]{
+  width: 320px;
+  height: 52px;
+ }
+
+ .content{
+  padding: 40px 40px 2px;
+ }
+
+ .content h1{
+  font-size: 24px;
+  margin: 24px, 0, 0;
+  font-weight: bold;
+ }
+
+ .googleSignInButton {
+  cursor: pointer;
+  transition: background-color .3s, box-shadow .3s;
+      
+  padding: 12px 16px 12px 42px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  
+  color: #757575;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 12px 11px;
+  width: 240px;
+  font-size: 16px;
+  display: flex;
+  margin-bottom: 8px;
+  height: 52px;
+}
+
+.googleSignInButton:hover {
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+}
+
+.googleSignInButton:active {
+  background-color: #eeeeee;
+}
+
+.googleSignInButton:active {
+  outline: none;
+      box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, .04),
+      0 2px 4px rgba(0, 0, 0, .25),
+      0 0 0 3px #c8dafc;
+}
+
+.googleSignInButton:disabled {
+  filter: grayscale(100%);
+  background-color: #ebebeb;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  cursor: not-allowed;
+}
+
+.microsoftSignInButton {
+  cursor: pointer;
+  transition: background-color .3s, box-shadow .3s;
+      
+  padding: 12px 16px 12px 42px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  
+  color: #757575;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  background-image: url("https://www.svgrepo.com/download/303143/microsoft-logo.svg");
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 12px 11px;
+  width: 240px;
+  font-size: 16px;
+  display: flex;
+  height: 52px;
+}
+
+.microsoftSignInButton:hover {
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+}
+
+.microsoftSignInButton:active {
+  background-color: #eeeeee;
+}
+
+.microsoftSignInButton:active {
+  outline: none;
+      box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, .04),
+      0 2px 4px rgba(0, 0, 0, .25),
+      0 0 0 3px #c8dafc;
+}
+
+.microsoftSignInButton:disabled {
+  filter: grayscale(100%);
+  background-color: #ebebeb;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  cursor: not-allowed;
+}
+
+
+ .or{
+  display: flex
+  ;
+      flex-direction: row;
+      text-transform: uppercase;
+      border: none;
+      font-size: 12px;
+      font-weight: 400;
+      gap: 10px;
+      margin: 0;
+      padding: 8px 0 0;
+      align-items: center;
+      justify-content: center;
+      vertical-align: baseline;
+ }
+
+ .or h2{
+  font-size: 12px;
+ }
+
+
+
+}
+
+@media(min-width: 1025px) and (max-width: 1200px){
+  .heading{
+    font-size: 48px;
+    color: #FFFFFF; /* Bright white */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Adds contrast and visibility */
+   }
+  
+   .landingPageContainer{
+    position: relative;
+    background-image: url("../Assets/iStock-1225527535\ \(1\).jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    height: 100vh;
+    filter: drop-shadow(0 0 10px #8a2be2);
+    width: 100vw;
+    
+   }
+  
+   .landingContainer h1{
+    margin-bottom: 20px; /* Space between header and subtext */
+    color: #FFFFFF; /* White */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Drop shadow for contrast */
+    font-weight: bold;
+   }
+  
+   .doubleForm{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      gap: 10px;
+      width: 100%;
+  
+   }
+  
+   .inputFields23{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      gap: 20px;
+      width: 100%;
+    
+   }
+   
+  
+   .landingContainer p{
+    font-size: 1.2rem;
+    color: #FFFFFF; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px; /* Space between subtext and button */
+    font-weight: 600;
+    margin-bottom: 50px;
+  }
+  
+   .landingPageContainer::before{
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Slightly more opacity for better readability */
+   }
+  
+   .landingContainer{
+      padding: 40px;
+      margin-bottom: 30px; /* More spacing for large screens */
+      text-align: center;
+      max-width: 900px; /* Limit text width for readability */
+      margin: 0 auto; /* Center content block */
+      margin-top: 70px;
+  
+   }
+  
+   .form .inputFields2 input{
+    margin-bottom: 10px;
+   }
+  
+   .inputFields input[type = "submit"]{
+    margin-bottom: 10px;
+    margin-top: auto;
+   }
+  
+   .getStarted{
+    background-color: #4A148C;
+      color: #FFFFFF;
+      transition: 0.3s;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: none;
+    border: 2px solid #FFFFFF; /* High-contrast border */
+      transition: 0.3s;
+    z-index: 10;
+   }
+  
+   .button{
+    background: linear-gradient(to right, #6C63FF, #C779D0);
+    border: none;
+    border-radius: 5px;
+    margin-top: 0px;
+    padding: 12px 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+   }
+  
+   .getStarted:hover{
+    background-color: #5A52E0; /* Slightly darker on hover */
+    transform: translateY(-3px); /* Lift effect */
+   }
+   
+  
+   .features{
+    padding: 20px 0;
+   }
+  
+   .features h1{
+    line-height: 1.8em;
+   }
+  
+   .features p{
+    width: 900px;
+    line-height: 1.8em;
+    font-size: 15px;
+    margin: 0 0 15px
+   }
+  
+   .mission{
+    padding: 20px 0;
+   }
+  
+   .mission h1{
+    line-height: 1.8em;
+   }
+  
+   .mission p{
+    width: 900px;
+    line-height: 1.8em;
+    font-size: 15px;
+    margin: 0 0 15px;
+   }
+  
+   .featuresContainer{
+    gap: 30px;
+   }
+  
+   .featureText h1{
+    line-height: 1.8em;
+    margin-bottom: 5px;
+    
+   }
+  
+   .featureText p{
+      font-size: 15px;
+      margin: 0 0 15px;
+      line-height: 1.8em;
+   }
+  
+   .form{
+    padding: 20px 40px;
+   }
+  
+   .inputFields2{
+   }
+  
+   .containerSignUp{
+    margin-top: 75px;
+  
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px; /* Soft rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+   }
+  
+   .wrappedContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+   }
+  
+   .inputFields2 input, label{
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+   }
+  
+   .inputFields2 input{
+    background-color: #121212;
+    color: #ffffff; /* Brighter text for better readability */
+    margin: 5px 0; /* Reduce vertical spacing */
+    min-width: 150px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 6px;
+   }
+  
+   .content h2{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1rem;
+   }
+   .doubleForm{
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+   }
+  
+   .wrappedContainer2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin: 0;
+    overflow-x: hidden;
+   }
+  }
+
+@media(min-width: 1200px){
+ .heading{
+  font-size: 48px;
+  color: #FFFFFF; /* Bright white */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Adds contrast and visibility */
+ }
+
+ .inputFields{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+ }
+
+ .landingPageContainer{
+  position: relative;
+  background-image: url("../Assets/iStock-1225527535\ \(1\).jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom center;
+  height: 100vh;
+  width: 100vw;
+  
+ }
+
+ .landingContainer h1{
+  margin-bottom: 20px; /* Space between header and subtext */
+  color: #FFFFFF; /* White */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Drop shadow for contrast */
+  font-weight: bold;
+ }
+
+ .doubleForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+
+ }
+
+ .inputFields23{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+  
+ }
+ 
+
+ .landingContainer p{
+  font-size: 1.2rem;
+  color: #FFFFFF; 
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 30px; /* Space between subtext and button */
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+ .landingPageContainer::before{
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2); /* Slightly more opacity for better readability */
+ }
+
+ .landingContainer{
+    padding: 40px;
+    margin-bottom: 30px; /* More spacing for large screens */
+    text-align: center;
+    max-width: 900px; /* Limit text width for readability */
+    margin: 0 auto; /* Center content block */
+    margin-top: 70px;
+
+ }
+
+ .inputFields input[type = "submit"]{
+  background: linear-gradient(90deg, #6c63ff, #834dff);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+ }
+
+ .inputFields input[type = "submit"]:hover{
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #755ffe, #9456ff);
+ }
+
+ .getStarted{
+  background-color: #4A148C;
+    color: #FFFFFF;
+    transition: 0.3s;
+  padding: 15px 30px;
+  border-radius: 8px;
+  box-shadow: none;
+  border: 2px solid #FFFFFF; /* High-contrast border */
+    transition: 0.3s;
+  z-index: 10;
+  width: 320px;
+ }
+
+ .content p{
+  margin-top: 0px;
+  text-align: center;
+  margin-bottom: 0px;
+ }
+
+ .inputFields2 input{
+  margin-top: 0px;
+ }
+
+ .button{
+  background: linear-gradient(to right, #6C63FF, #C779D0);
+  border: none;
+  border-radius: 5px;
+  margin-top: 0px;
+  padding: 12px 20px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+ }
+
+ .thing{
+  width: 200px;
+ }
+
+ .alternativeSignIn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+ 
+ }
+
+ input[type = "email"]{
+  width: 320px;
+  height: 52px;
+ }
+
+ .content{
+  padding: 40px 40px 2px;
+ }
+
+ .content h1{
+  font-size: 32px;
+  margin: 24px, 0, 0;
+  font-weight: bold;
+ }
+
+ .googleSignInButton {
+  cursor: pointer;
+  transition: background-color .3s, box-shadow .3s;
+      
+  padding: 12px 16px 12px 42px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  
+  color: #757575;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 12px 11px;
+  width: 320px;
+  font-size: 16px;
+  display: flex;
+  margin-bottom: 8px;
+  height: 52px;
+}
+
+.googleSignInButton:hover {
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+}
+
+.googleSignInButton:active {
+  background-color: #eeeeee;
+}
+
+.googleSignInButton:active {
+  outline: none;
+      box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, .04),
+      0 2px 4px rgba(0, 0, 0, .25),
+      0 0 0 3px #c8dafc;
+}
+
+.googleSignInButton:disabled {
+  filter: grayscale(100%);
+  background-color: #ebebeb;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  cursor: not-allowed;
+}
+
+.microsoftSignInButton {
+  cursor: pointer;
+  transition: background-color .3s, box-shadow .3s;
+      
+  padding: 12px 16px 12px 42px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  
+  color: #757575;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  
+  background-image: url("https://www.svgrepo.com/download/303143/microsoft-logo.svg");
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 12px 11px;
+  background-size: contain;
+  width: 320px;
+  font-size: 16px;
+  display: flex;
+  height: 52px;
+}
+
+.microsoftSignInButton:hover {
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+}
+
+.microsoftSignInButton:active {
+  background-color: #eeeeee;
+}
+
+.microsoftSignInButton:active {
+  outline: none;
+      box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, .04),
+      0 2px 4px rgba(0, 0, 0, .25),
+      0 0 0 3px #c8dafc;
+}
+
+.microsoftSignInButton:disabled {
+  filter: grayscale(100%);
+  background-color: #ebebeb;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  cursor: not-allowed;
+}
+
+
+ .or{
+  display: flex
+  ;
+      flex-direction: row;
+      text-transform: uppercase;
+      border: none;
+      font-size: 12px;
+      font-weight: 400;
+      gap: 10px;
+      margin: 0;
+      padding: 8px 0 0;
+      align-items: center;
+      justify-content: center;
+      vertical-align: baseline;
+ }
+
+ .or h2{
+  font-size: 12px;
+ }
+
+ .getStarted:hover{
+  background-color: #5A52E0; /* Slightly darker on hover */
+  transform: translateY(-3px); /* Lift effect */
+ }
+ 
+
+ .features{
+  padding: 20px 0;
+ }
+
+ .features h1{
+  line-height: 1.8em;
+ }
+
+ .features p{
+  width: 900px;
+  line-height: 1.8em;
+  font-size: 15px;
+  margin: 0 0 15px
+ }
+
+ .mission{
+  padding: 20px 0;
+ }
+
+ .mission h1{
+  line-height: 1.8em;
+ }
+
+ .mission p{
+  width: 900px;
+  line-height: 1.8em;
+  font-size: 15px;
+  margin: 0 0 15px;
+ }
+
+ .featuresContainer{
+  gap: 30px;
+ }
+
+ .featureText h1{
+  line-height: 1.8em;
+  margin-bottom: 5px;
+  
+ }
+
+ .featureText p{
+    font-size: 15px;
+    margin: 0 0 15px;
+    line-height: 1.8em;
+ }
+
+ .form{
+  padding: 20px 40px;
+ }
+
+ .containerSignUp{
+  margin-top: 75px;
+
+  padding: 30px;
+  border-radius: 10px;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 450px;
+  border-radius: 10px; /* Soft rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+ }
+
+ .wrappedContainer{
+  display: flex;
+  justify-content: center;
+  padding: 80px;
+  margin-top: 50px;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+ }
+
+ .inputFields2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+ }
+
+ .inputFields2 input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 16px;
+  height: 52px;
+  width: 320px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 16px;
+ }
+
+ .inputFields2 input::placeholder{
+  color: #ddd
+ }
+
+ .account{
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 0;
+  font-size: 14px;
+ }
+
+ .account p{
+  font-size: 14px;
+   margin: 12px 0;
+  color: #FFFFFF;
+ }
+
+ .linkSign{
+  padding: 6px;
+  color: #fff;
+ }
+
+
+ .or:before,
+.or:after {
+  content: "";
+  border-bottom: 1px solid #c2c8d0;
+  flex: 1 0 auto;
+  height: .5em;
+  margin: 0;
+}
+ }

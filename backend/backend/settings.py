@@ -53,11 +53,40 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000"  # Replace with your frontend URL
 ]
 
+INSTALLED_APPS += [
+    'rest_framework_simplejwt',
+]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+
 ROOT_URLCONF = 'backend.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -90,6 +119,15 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
 CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
@@ -121,6 +159,23 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'budget.Users'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # This loads the environment variables from .env
+
+
+
+TELLER_API_KEY = os.getenv('TELLER_API_KEY')
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -141,7 +196,12 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+     {
+        'NAME': 'path.to.PasswordValidator',
+    },
 ]
+
+# settings.py
 
 AUTH_PASSWORD_VALIDATORS = [
     {
