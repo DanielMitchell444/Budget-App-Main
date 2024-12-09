@@ -116,6 +116,37 @@ const handleProfileChange = (e) => {
   const {name, value} = e.target;
   setProfile((prev) => ({...prev, [name]: value}))
 }
+
+
+  const openTellerLink = () => {
+    if (linkToken) {
+      const teller = new window.TellerLink({
+        token: linkToken,
+        onSuccess: (publicToken) => {
+          // You will receive the public token here after the user successfully links their bank account
+          console.log("Linking successful:", publicToken);
+          
+          // You can send the publicToken to your backend to exchange for access and refresh tokens
+          fetch("/api/exchange_public_token/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ public_token: publicToken }),
+          });
+        },
+        onExit: (error) => {
+          if (error) {
+            console.error("Linking exited with error:", error);
+          } else {
+            console.log("Linking exited.");
+          }
+        },
+      });
+
+      teller.open();
+    }
+  };
 const handleLogin = async (e) => {
   e.preventDefault();
 
@@ -354,45 +385,38 @@ const handleSubmit = async (e) => {
     }
 
   } else if (steps === 3) {
+    const token = localStorage.getItem('auth_token'); // Replace with your token storage mechanism
+
+  
     try {
-      const response = await axios.get("http://localhost:8000/api/create_link_token/");
-      console.log("Step 3 Data:", response.data);
-    } catch (error) {
-      if (error.response) {
-        console.log("Step 3 Server Error:", error.response.data.message);
-      } else if (error.request) {
-        console.log("Step 3 Request Error:", error.request);
+      const response = await fetch("http://localhost:8000/api/create_link_token/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // Pass the auth token if required
+        },
+        body: JSON.stringify({
+          user_id: "unique_user_id", // Replace with actual payload expected by your Django API
+        }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setLinkToken(data.link_token); // Set the link token from the response
       } else {
-        console.log("Step 3 General Error:", error.message);
+        const errorData = await response.json();
+        console.error("Failed to fetch link token", errorData);
       }
+    } catch (error) {
+      console.error("Error while fetching link token:", error);
     }
   }
+    }
 
     // Step 1: Fetch the link token from your backend server
 
 
-  }
 
-  
-
-  const fetchLinkToken = async () => {
-    try {
-      const token = localStorage.getItem('auth_token'); // Fetch your auth token if required
-      const response = await axios.post(
-        'http://localhost:8000/api/create_link_token/', {}, {
-        
-        headers: {
-          'Authorization': `Bearer ${token}`,  // Ensure "Bearer" followed by a space and the token
-        }
-        });
-      setLinkToken(response.data.link_token);
-      setLoading(false); // Set loading to false after fetching token
-    } catch (error) {
-      console.error('Error fetching link token:', error.response?.data || error.message);
-      setLoading(false); // Stop loading even if there’s an error
-      console.log(linkToken)
-    }
-  };
 
   const exchangePublicToken = async (publicToken) => {
     try {
@@ -404,9 +428,6 @@ const handleSubmit = async (e) => {
     }
   };
 
-  useEffect(() => {
-    fetchLinkToken();
-  }, []);
 
   const { open, ready } = usePlaidLink({
     token: linkToken,
@@ -521,6 +542,7 @@ google = {handleSignIn}
       steps = {steps}
       error = {error}
       linkToken = {linkToken}
+      openTellerLink = {openTellerLink}
       onSuccess={exchangePublicToken}
       open = {open}
       generalError = {generalError}
