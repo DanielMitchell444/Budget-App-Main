@@ -25,36 +25,28 @@ from django.contrib.auth.models import User
 class UserSeralizers(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['first_name', 'last_name',  'email', 'birthday', 'last_login']
+        fields = ['first_name', 'last_name',  'birthday', 'last_login', 'gender', 'address', 'city', 'state', 'account_number','amount','currency', 'routing_number', 'transaction_date','transaction_description']
 
     def validate(self, data):
         errors = {}
 
         # Custom validation for FirstName, LastName, Username, Password
-        if len(data['FirstName']) < 5:
-            errors['FirstName'] = "First Name must be at least 5 characters long."
-        if len(data['LastName']) < 5:
-            errors['LastName'] = "Last Name must be at least 5 characters long."
-        if len(data['Username']) < 5:
-            errors['Username'] = "Username must be at least 5 characters long."
-        if len(data['Password']) < 8:
-            errors['Password'] = "Password must be at least 8 characters long."
-        if not re.search(r'\d', data["Password"]):
-            errors['Password'] = "Password must contain at least one number."
-        if not re.search(r'[!@#$%^&*(),.?":{}|<>]', data["Password"]):
-            errors['Password'] = "Password must contain at least one special character."
+        if len(data['first_name']) < 5:
+            errors['first_name'] = "First Name must be at least 5 characters long."
+        if len(data['last_name']) < 5:
+            errors['last_name'] = "Last Name must be at least 5 characters long."
 
         # Check if the email already exists
-        email = data.get('Email', '')
+        email = data.get('email', '')
         if Users.objects.filter(email=email).exists():
-            errors['Email'] = "This email is already registered. Please use a different email address."
+            errors['email'] = "This email is already registered. Please use a different email address."
 
         # Email format validation
         email_validator = EmailValidator()
         try:
             email_validator(email)
         except ValidationError:
-            errors['Email'] = "Please enter a valid email address."
+            errors['email'] = "Please enter a valid email address."
 
         if errors:
             raise serializers.ValidationError(errors)

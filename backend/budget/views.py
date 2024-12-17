@@ -3,6 +3,9 @@ from rest_framework import viewsets
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
+from dotenv import load_dotenv
+import os
+from django.conf import settings
 from rest_framework.response import Response
 from .serializers import UserSeralizers
 from rest_framework.permissions import AllowAny
@@ -29,6 +32,7 @@ from .serializers import RegistrationSerializer, ProfileUpdateSerializer
 from django.contrib.auth.hashers import make_password
 
 from .models import Users
+import logging
 from django.shortcuts import render
 from django import forms
 from .serializers import LoginSeralizer
@@ -39,6 +43,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as django_login
 from django.utils.timezone import now
 import usaddress
 from geopy.geocoders import Nominatim
@@ -363,7 +368,10 @@ def validate_user(request):
 
     # Save user if validation passes
     user = Users.objects.create(email=email, password= make_password(password))
-    return Response({'message': 'User created successfully'}, status=201)
+    return JsonResponse({
+            "message": "User created successfully!",
+            "user_id": user.id
+        }, status=201)
 @csrf_exempt
 @api_view(["POST"])
 def validate_credentials(request):
@@ -420,9 +428,15 @@ def login_user(request):
 
     # Generate or retrieve the token
     token, _ = Token.objects.get_or_create(user=user)
+     # Save the token in the User model
+    user.token = token.key
+    user.save()
 
     if user.last_login == None:
-        return Response('Please complete your profile')
+        return Response({
+        'message': 'Please complete your profile',
+        'token': token.key
+        })
     
     else:
 
@@ -522,6 +536,27 @@ class ValidateLoginEmailView(APIView):
             return Response({'message': 'Email not registered.'}, status=404)
 
         return Response({'message': 'Email is valid.'}, status=200)
+class RefreshTokenView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        # Get the refresh token from the request
+        refresh_token = request.data.get('refresh_token')
+        
+        if not refresh_token:
+            return Response({'error': 'Refresh token is required'}, status=400)
+        
+        try:
+            # Parse the refresh token to generate a new access token
+            refresh = RefreshToken(refresh_token)
+            new_access_token = str(refresh.access_token)
+            
+            # Return the new access token
+            return Response({
+                'access_token': new_access_token
+            }, status=200)
+        except Exception as e:
+            return Response({'error': str(e)}, status=400)
 
 class ValidateLoginDetailsView(APIView):
     permission_classes = [AllowAny]  # Public access to this endpoint
@@ -545,23 +580,48 @@ class ValidateLoginDetailsView(APIView):
                 {'message': 'Invalid email or password.'},
                 status=401
             )
+    
         
-        
-        login(request, user)
+        django_login(request, user)
+
+        refresh = RefreshToken.for_user(user)
+        new_access_token = str(refresh.access_token)
+        new_refresh_token = str(refresh)
+
+        print(f"New Access Token {new_access_token}")
+        print(f"New Refresh Token {new_refresh_token}")
+
+        # Update user tokens in the database
+        user.access_token = new_access_token
+        user.refresh_token = new_refresh_token
+        user.save()
+        first_name = request.data.get('first_name')
+        birthday = request.data.get('birthday')
+        gender = request.data.get('gender')
+        address = request.data.get('address')
+        city = request.data.get('city')
+        state = request.data.get('state')
+
+         # Save tokens to the user model
+
 
         # Check if it's the user's first login
-        if user.is_first_login:
+        if user.is_first_login or not first_name or not birthday or not gender or not address or not city or not state :
             user.is_first_login = False
             print(user.last_login)
             user.save()
             return Response({
                 'message': 'Welcome! This is your first login.',
-                'first_login': True
+                'first_login': True,
+                'access_token': new_access_token,
+                'refresh_token': new_refresh_token
             }, status=200)
         else:
          return Response({
             'message': 'Password is valid.',
-            'first_login': False
+            'first_login': False,
+            'access_token': new_access_token,
+            'refresh_token': new_refresh_token
         }, status=200)
    
 def validate_info(request): 
@@ -588,46 +648,251 @@ def validate_address(request):
           Response("Please enter a valid address")
 
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def create_link_token(request):
-       user = request.user  # This will be set after successful JWT validation
-       print(f"Authenticated user: {user}")
-       user_id = str(request.email)  # Assuming you're using Django's built-in User model
-       response = ApiClient.LinkToken.create({
-        'user': {'id': user_id},
-        'client_name': 'budget',
-        'products': ['auth', 'transactions'],  # Add products as needed
-        'country_codes': ['US'],
-        'language': 'en',
-    })
-       return JsonResponse(response)
-
-@api_view(['POST'])
-def exchange_public_token(request):
-    public_token = request.data.get('public_token')
-    exchange_response = ApiClient.Item.public_token.exchange(public_token)
-    return JsonResponse(exchange_response)
+logger = logging.getLogger(__name__)
 
 
+logger = logging.getLogger(__name__)
 
 
+api_view(["POST"])
 class completeBasicInfo(APIView):
     permission_classes = [AllowAny]  # Allow public access to this endpoin
     def post(self, request):
-        first_name = request.data.get("first_name")
+        email = request.data.get('email')
+        password = request.data.get('password')
+        first_name = request.data.get('first_name')
         last_name = request.data.get('last_name')
         gender = request.data.get('gender')
-        address = request.data.get('address')
-         ##Checks the address entered 
-        parsed_address = usaddress.parse(address)
+        birthday = request.data.get('birthday')
 
-        if first_name.upper() or last_name.upper():
-            return Response("First and last name must be lowercase")
-        elif len(gender) < 1:
-            return Response("Please enter your gender")
+
+
+        # Validation logic
+        if not first_name or not gender or not birthday:
+            return Response({'message': 'All fields are required.'}, status=400)
+        
+        try:
+            user = Users.objects.get(email = email)
+        except Users.DoesNotExist:
+            return Response({'message': 'User does not exist.'}, status=404)
+        
+        user.first_name = first_name
+        user.last_name = last_name
+        user.gender = gender
+        user.birthday = birthday
+        user.save()
+
+        try:
+            user.save()
+            return Response({"Message": "User information updated successfully."}, status=200)
+        except Exception as e:
+            return Response({"Message": "Failed to update user information.", "error": str(e)}, status=500)
+
+class ValidateAddressInfoView(APIView):
+    permission_classes = [AllowAny]
+
+
+    def post(self, request):
+
+       # Extract input fields from request data
+     email = request.data.get('email')
+     address = request.data.get("address")
+     city = request.data.get("city")
+     state = request.data.get("state")
+    
+    # Your PositionStack API key
+     api_key = 'd140fb9a855f8f16408e296dc89e3c31'
+    
+    # Combine address, city, and state to form the full address
+     full_address = f'{address}, {city}, {state}'
+    
+    # PositionStack API endpoint
+     url = "http://api.positionstack.com/v1/forward"
+    
+    # Set up the parameters for the API request
+     params = {
+        'access_key': api_key,
+        'query': full_address,
+        'limit': 1,
+        "output": "json"
+    }
+    
+    # Send the request to the PositionStack API
+     response = requests.get(url, params=params)
+
+    # Check if the request was successful
+     if response.status_code == 200:
+        data = response.json()
+        
+        if data["data"]:
+            # Address is valid, extract relevant information
+            result = data["data"][0]
+            return JsonResponse({
+                "valid": True,
+                "address": result.get("label", "No address available"),
+                "city": result.get("city"),
+                "state": result.get("region"),
+                "country": result.get("country"),
+                "latitude": result.get("latitude"),
+                "longitude": result.get("longitude")
+            })
+        
         else:
-            return Response("Everything is valid")
+            # No matching address found
+            return JsonResponse({"valid": False, "error": "Address not found"})
+     else:
+        # API request failed
+        return JsonResponse({"valid": False, "error": "API request failed"})
+
+
+class SaveCompletedProfile(APIView):
+
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+      user = request.user
+      data = request.data
+
+      try:
+            # Update user information
+            user.first_name = data.get('first_name', user.first_name)
+            user.last_name = data.get('last_name', user.last_name)
+            user.bank_name = data.get('bank_name')
+            user.account_number = data.get('account_number')
+            user.routing_number = data.get('routing_number')
+            user.save()
+
+            # Save additional info if needed
+            return Response({"message": "Profile updated successfully with bank information."}, status=200)
+      except Exception as e:
+            return Response({"error": str(e)}, status=400)
+
+api_view(["POST"])
+class TellerAccountsProxyView(APIView):
+   permission_classes = [IsAuthenticated]
+
+
+   def post(self, request):
+        teller_access_token = request.data.get("tellerAccessToken")
+        if not teller_access_token:
+            return Response({"error": "Missing Teller access token"}, status=400)
+
+        # Use the Teller access token to fetch bank information
+        url = "https://api.teller.io/accounts"
+        headers = {"Authorization": f"Bearer {teller_access_token}"}
+
+        try:
+            # Forward request to Teller API
+            teller_response = requests.get(url, headers=headers)
+            teller_response.raise_for_status()  # Raise exception for HTTP errors
+
+            # Return data from Teller API
+            return Response(teller_response.json(), status=200)
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Teller API request failed: {e}")  # Log error for debugging
+            return Response({"error": "Failed to fetch data from Teller API"}, status=502)
+# Helper function to load certificate and key paths
+def load_cert_and_key():
+    cert_path = os.getenv('CERT_PATH')
+    key_path = os.getenv('KEY_PATH')
+
+    if not cert_path or not key_path:
+        raise ValueError("CERT_PATH or KEY_PATH is not set in the environment.")
+    if not os.path.exists(cert_path):
+        raise ValueError(f"Certificate file not found at {cert_path}.")
+    if not os.path.exists(key_path):
+        raise ValueError(f"Private key file not found at {key_path}.")
+    
+    return cert_path, key_path
+
+# Helper function to get access token for the user
+def get_access_token_for_user(user):
+    if user.access_token:
+        return user.access_token
+    else:
+        logger.error(f"No access token found for user {user.email}")
+        return None
+
+# View to create link token
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def create_link_token(request):
+    try:
+        # Load certificate and key
+        cert_path, key_path = load_cert_and_key()
+    except ValueError as e:
+        logger.error(f"Certificate error: {str(e)}")
+        return JsonResponse({"error": str(e)}, status=500)
+
+    user = request.user
+
+    # Prepare data for the Teller API request
+    data = {
+        "application": {"name": "budget"},
+        "user": {"id": str(user.id)},
+    }
+
+    # Retrieve the Teller API URL from environment variables
+    base_url = os.getenv('TELLER_API_URL', 'https://api-sandbox.teller.io/v1')
+    if not base_url:
+        logger.error("TELLER_API_URL is not set in the environment.")
+        return JsonResponse({"error": "TELLER_API_URL is not configured."}, status=500)
+
+    # Fetch access token for the user
+    access_token = get_access_token_for_user(user)
+    if not access_token:
+        
+        return JsonResponse({"error": "Unable to retrieve access token."}, status=500)
+
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json",
+    }
+
+    try:
+        # Make a POST request to the Teller API
+        response = requests.post(
+            f"{base_url}/link",
+            json=data,
+            headers=headers,
+            cert=(cert_path, key_path)
+        )
+
+        if response.status_code == 200:
+            return JsonResponse(response.json())
+        else:
+            try:
+                error_details = response.json()
+            except ValueError:
+                error_details = response.text
+            logger.error(f"Teller API error for user {user.id}: {response.status_code}, {error_details}")
+            return JsonResponse({"error": error_details}, status=response.status_code)
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Teller API request failed for user {user.id}: {str(e)}")
+        return JsonResponse({"error": "Failed to connect to Teller API."}, status=500)
+
+# View to exchange public token
+@api_view(['POST'])
+def exchange_public_token(request):
+    public_token = request.data.get('public_token')
+    if not public_token:
+        return JsonResponse({"error": "public_token is required."}, status=400)
+
+    url = "https://api.teller.io/v1/token"
+    headers = {"Authorization": f"Bearer {settings.TELLER_API_KEY}"}
+    data = {"public_token": public_token}
+
+    try:
+        response = requests.post(url, json=data, headers=headers)
+        if response.status_code == 200:
+            return JsonResponse(response.json())  # Send access token and refresh token
+        else:
+            logger.error(f"Teller API error: {response.status_code}, {response.text}")
+            return JsonResponse({"error": "Failed to exchange public token"}, status=response.status_code)
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Teller API request failed: {str(e)}")
+        return JsonResponse({"error": "Failed to connect to Teller API."}, status=500)
 
 
 class complete_location_info(APIView):
@@ -682,6 +947,7 @@ class complete_location_info(APIView):
      else:
         # API request failed
         return JsonResponse({"valid": False, "error": "API request failed"})
+
 
    
 

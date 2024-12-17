@@ -29,11 +29,20 @@ class Users(AbstractBaseUser, PermissionsMixin):
     birthday = models.DateField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    access_token = models.TextField(blank=True, null=True)
+    refresh_token = models.TextField(blank=True, null=True)
     gender = models.CharField(max_length=14, blank=True, unique=False )
     address = models.CharField(max_length=64, blank=True, unique=False )
     city = models.CharField(max_length=24, blank=True, unique=False )
     state = models.CharField(max_length=32, blank=True, unique=False )
     is_first_login = models.BooleanField(default=True)
+    account_number = models.CharField(max_length=48, blank=True, unique=False)
+    routing_number = models.CharField(max_length=48, blank=True, unique=False)
+    amount = models.CharField(max_length=48, blank=True, unique=False)
+    transaction_date = models.CharField(max_length=48, blank=True, unique=False)
+    transaction_description = models.CharField(max_length=48,blank=True, unique=False)
+    currency = models.CharField(max_length=48, blank=True, unique=False)
+    
 
     objects = UserManager()
 

@@ -2,7 +2,7 @@ import React from "react";
 import styles from '../Styles/App.module.css'
 import { PlaidLink } from 'react-plaid-link';
 
-const Setup = ({data, onChange, steps, error, ready, generalError, exchangePublicToken, onSubmit,onSuccess, open, linkToken2}) => {
+const Setup = ({data, onChange, steps, error, ready, openTellerLink, generalError, exchangePublicToken, onSubmit,onSuccess, open, linkToken2}) => {
     return(
     <div className= {styles.wrappedContainer}>
     <div className= {styles.containerSignUp}>
@@ -34,7 +34,7 @@ const Setup = ({data, onChange, steps, error, ready, generalError, exchangePubli
      onChange={onChange}
 
      />
-     <input type = "date"
+     <input type = "text"
      placeholder="Birthday"
      name = "birthday"
      value = {data.birthday}
@@ -93,13 +93,9 @@ const Setup = ({data, onChange, steps, error, ready, generalError, exchangePubli
     {steps === 3 && (
      <>
        <h1>Link Your Bank Account</h1>
-      {linkToken2 ? (
-        <button onClick={() => open()} disabled={!ready}>
-          Connect a Bank Account
-        </button>
-      ) : (
-        <p>Error: Unable to fetch link token</p>
-      )}
+       <button onClick={() => open()} disabled = {!ready}>
+        Connect a bank account
+       </button>
 
         <div className= {styles.inputFields}>
       <input type = "submit" value= "Continue" 

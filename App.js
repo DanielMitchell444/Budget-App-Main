@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from '../src/Styles/App.module.css'
 import Login from './Components/Login';
 import Menu from './Components/Menu';
+import { useTellerConnect } from 'teller-connect-react';
 import { useEffect, useState } from 'react';
 import { BrowserRouter,  Routes, Route } from 'react-router-dom';
 import SignUp from './Components/SignUp';
@@ -18,6 +19,7 @@ import Info from './Components/Info';
 import Dashboard from './Components/Dashboard';
 import Setup from './Components/Setup';
 import { usePlaidLink } from 'react-plaid-link';
+import { useTellerLink } from 'teller-connect-react'; // Import Teller Link hook
 function App() {
   //Handing input fields //
    
@@ -47,7 +49,9 @@ function App() {
 
   const [loginData, setLoginData] = useState({
     Email: "",
-    Password: ""
+    Password: "",
+    access_token: "",
+    refresh_token: ""
   })
 
   const [loginData2, setLoginData2] = useState({
@@ -64,9 +68,12 @@ function App() {
     state: "",
     account_number: "",
     bank_name: "",
-    available_account_balance: "",
-    current_account_balance: "",
+    routing_number: "",
+    amount: "",
+    transaction_date: "",
+    transaction_description: "",
     currency: ""
+
   })
 
   const [valid, setIsValid] = useState()
@@ -239,15 +246,24 @@ const handleSubmitLogIn = async (e) => {
         }
       );
 
-      const { message, first_login } = response.data; // Extract tokens from the response
-      console.log(message)
+      const {first_login, access_token, refresh_token } = response.data; // Extract tokens from the response
+      localStorage.setItem('access_token', access_token)
+      localStorage.setItem('refresh_token', refresh_token)
       if(first_login === true){
       // Store tokens securely
-       alert('Welcome, please complete your profile')
-       window.location.href = "/Setup"
+      alert("Welcome! Please complete your profile")
+      window.location.href = "/Setup"
+       localStorage.setItem('access_token',access_token)
+       localStorage.setItem('refresh_token', refresh_token)
+       console.log('Access Token', access_token)
+       console.log('Refresh Token', refresh_token)
+      
       } else{
-        alert(message)
         console.log(first_login)
+        localStorage.setItem('access_token',access_token)
+        localStorage.setItem('refresh_token', refresh_token)
+        console.log('Access Token', access_token)
+        console.log('Refresh Token', refresh_token)
        }
 
     } catch (error) {
@@ -333,6 +349,7 @@ const handleSubmit = async (e) => {
           'Content-Type': 'application/json',
         }})
       localStorage.setItem('auth_token', response.data.token)
+      console.log(response.data.token);
        window.location.href = "/"
        alert("Succesfully signed up")
        console.log(data)
@@ -351,16 +368,63 @@ const handleSubmit = async (e) => {
         }
       }
       }
+
+      const { open, ready } = useTellerConnect({
+        applicationId: "app_p76c29q36r8ae6hq9a000", // Teller application ID
+        environment: "sandbox",
+        onSuccess: async (auth) => {
+            console.log("Teller authentication successful:", auth);
+    
+            const tellerAccessToken = auth.accessToken; // Extract the Teller access token
+            const access = localStorage.getItem('access_token')
+            console.log("Teller Access Token:", tellerAccessToken);
+    
+            // Send the Teller access token to the backend
+            try {
+                const response = await axios.post("http://localhost:8000/api/teller/accounts/", {
+                    tellerAccessToken: tellerAccessToken,
+                
+                },
+                {
+      
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+            });
+                
+    
+                if (response.data) {
+                    console.log("Bank information:", response.data);
+                    // Handle the bank information (e.g., display it, store it, etc.)
+                } else {
+                    console.error("Failed to fetch bank information.");
+                }
+            } catch (error) {
+                console.error("Error:", error.message);
+            }
+        },
+        onExit: () => {
+            console.log("Teller API window closed by user.");
+        },
+    });
  const handleProfile = async (e) => {
    e.preventDefault();
+
    if(steps === 1){
    try{
     await axios.post("http://localhost:8000/api/validate_basic_info/", {
       first_name: profile.first_name,
       last_name: profile.last_name,
+      email: loginData.Email,
       gender: profile.gender,
-      address: profile.address
-   })
+      birthday: profile.birthday
+   },
+   {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }
+  )
    nextSteps(steps + 1)
     } catch(response){
       if(error.response){
@@ -385,36 +449,57 @@ const handleSubmit = async (e) => {
     }
 
   } else if (steps === 3) {
-    const token = localStorage.getItem('auth_token'); // Replace with your token storage mechanism
-
-  
-    try {
-      const response = await fetch("http://localhost:8000/api/create_link_token/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // Pass the auth token if required
-        },
-        body: JSON.stringify({
-          user_id: "unique_user_id", // Replace with actual payload expected by your Django API
-        }),
-      });
-  
-      if (response.ok) {
-        const data = await response.json();
-        setLinkToken(data.link_token); // Set the link token from the response
-      } else {
-        const errorData = await response.json();
-        console.error("Failed to fetch link token", errorData);
+      if(ready){
+        open()
       }
-    } catch (error) {
-      console.error("Error while fetching link token:", error);
+      
+ }
+
+  // Now use `useTellerConnect` inside the component
+ 
+}
+
+const sendToBackend = async (auth) => {
+  const token3 = localStorage.getItem("access_token"); // Ensure the user is authenticated
+  try {
+
+     
+  
+    await axios.post(
+      "http://localhost:8000/api/save_complete_profile/",
+      {
+        first_name: profile.first_name,
+        last_name: profile.first_name,
+        Email: loginData.Email,
+        bank_name: auth.bank_name,
+        account_number: auth.account_number,
+        routing_number: auth.routing_number,
+        available: auth.available,
+        amount: auth.amount,
+        transaction_date: auth.transaction_date,
+        transaction_description: auth.transaction_description,
+        currency: auth.currency,
+      },
+      {
+      headers: {
+        Authorization: `Bearer ${token3}`, // Include the token for authenticated requests
+      },
+    }
+    )
+    console.log('Saved Succesfully')
+    console.log(token3)
+  } catch (error) {
+    if (error.response?.status === 401) {
+      console.error("Authentication error. Token might be expired.");
+      // Handle token refresh or redirect to login
+      const token4 = localStorage.getItem('access_token')
+      console.log(token4)
+      console.log(token3)
+    } else {
+      console.error("Error saving bank information:", error.response?.data || error.message);
     }
   }
-    }
-
-    // Step 1: Fetch the link token from your backend server
-
+}
 
 
 
@@ -429,18 +514,7 @@ const handleSubmit = async (e) => {
   };
 
 
-  const { open, ready } = usePlaidLink({
-    token: linkToken,
-    onSuccess: (public_token, metadata) => {
-      console.log('Public token:', public_token);
-      // Send public_token to your backend
-    },
-    onExit: (err, metadata) => {
-      if (err) {
-        console.error('Error during Plaid Link:', err);
-      }
-    },
-  });
+
   return (
     <div className= {styles.App}>
       <div className= {styles.landingContainer2}>
@@ -545,6 +619,7 @@ google = {handleSignIn}
       openTellerLink = {openTellerLink}
       onSuccess={exchangePublicToken}
       open = {open}
+      ready = {ready}
       generalError = {generalError}
       linkToken2 = {linkToken}
       />
